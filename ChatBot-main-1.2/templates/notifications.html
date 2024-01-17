@@ -1,0 +1,170 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customizable Affirmation Notifications</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      /* background: rgb(33, 33, 78); */
+      background: rgb(44, 47, 59);
+      background: -webkit-linear-gradient(to right, rgb(40, 59, 34), rgb(54, 60, 70), rgb(32, 32, 43));
+	    background: linear-gradient(to right, rgb(38, 51, 61), rgb(50, 55, 65), rgb(33, 33, 78));
+      margin: 0;
+      padding: 20px;
+      padding-top: 120px;
+      text-align: center;
+    }
+
+    .box{
+      background-color: rgba(0,0,0,0.4) !important;
+      padding-left: 0px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      border-radius: 30px;
+      
+    }
+
+    h1 {
+      color: #4caf50;
+      margin-bottom: 20px; 
+    }
+
+    label {
+      font-size: 18px;
+      margin-right: 10px;
+      color: white;
+      font-weight: bolder;
+    }
+
+    input {
+      padding: 12px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-right: 10px;
+      width: 80px;
+    }
+
+    button {
+      padding: 14px 30px;
+      font-size: 16px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+      font-weight: bolder;
+    }
+
+    button:hover {
+      background-color: #45a049;
+      opacity:1;
+    }
+
+    button:active{
+      background-color: #ccc;
+      color: #45a049;
+    }
+
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    /* Styling for notification */
+    .notification {
+      background-color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="box">
+  <label for="interval">Set Time Interval (hours): </label>
+  <input type="number" id="interval" min="1" value="1">
+  <button onclick="startAffirmationNotifications()">Start Affirmations</button>
+  <button onclick="stopAffirmationNotifications()">Stop Affirmations</button>
+</div>
+
+<img id="animatedImage" src="https://i.ibb.co/n1Gs7P1/chatbot-kiu-unscreen-unscreen-unscreen.webp" alt="User Image" class="animation">
+
+    <h1>Now you can set your notifications...!!</h1>
+
+
+  <script>
+    let intervalId; // To store the interval ID for later clearing
+
+    function showAffirmationNotification() {
+      // Array of affirmations
+      const affirmations = [
+        "You are capable of amazing things.",
+        "You are enough just as you are.",
+        "Today is a new day filled with possibilities.",
+        "You have the power to make a difference.",
+        "You are worthy of love and happiness."
+      ];
+
+      // Get a random affirmation
+      const randomIndex = Math.floor(Math.random() * affirmations.length);
+      const randomAffirmation = affirmations[randomIndex];
+
+      // Check if the Notification API is supported
+      if ('Notification' in window) {
+        // Request permission to show notifications
+        Notification.requestPermission().then(permission => {
+          if (permission === 'granted') {
+            // Create and show the notification
+            const notification = new Notification('Affirmation', {
+              body: randomAffirmation
+            });
+
+            // Close the notification after a few seconds (optional)
+            setTimeout(() => {
+              notification.close();
+            }, 5000); // Close after 5 seconds
+          }
+        });
+      } else {
+        // If the Notification API is not supported
+        alert('Notifications not supported in your browser.');
+      }
+    }
+
+    function startAffirmationNotifications() {
+      // Clear any existing interval
+      clearInterval(intervalId);
+
+      // Get the user-entered interval from the input field (converted to milliseconds)
+      const intervalInHours = parseInt(document.getElementById('interval').value, 10);
+      const intervalInMilliseconds = intervalInHours * 60 * 60 * 1000;
+
+      // Show the first affirmation immediately
+      showAffirmationNotification();
+
+      // Schedule the affirmations at the specified interval
+      intervalId = setInterval(showAffirmationNotification, intervalInMilliseconds);
+    }
+
+    function stopAffirmationNotifications() {
+      // Clear the interval to stop affirmations
+      clearInterval(intervalId);
+      alert('Your notifications are off...!!');
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+flask
+transformers
+torch
+openai
+pyttsx3
+os
+gTTS
+time
+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
+//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js
+//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js
+//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css
+
+https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js
+
+img:
+https://play-lh.googleusercontent.com/eoqEqzfbq0yVRVPxydRT4gdGs5ZS5BDvOWT7lfchio_Wqzf2qR-Ke3q0wSdxpdx2zDQF=w240-h480-rw
